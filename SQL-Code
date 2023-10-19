@@ -1,0 +1,39 @@
+--Organizing some of the sheets
+SELECT Crop, SUM(Value) AS Total
+FROM `eastern-camp-396602.CA_ag.products`
+GROUP BY Crop
+ORDER BY Crop
+
+--Viewing County Values
+SELECT County, SUM(Value) AS Total
+FROM `eastern-camp-396602.CA_ag.products`
+GROUP BY County
+ORDER BY Total DESC
+
+--Viewing specific products
+SELECT Year, Crop, SUM(Value) as Total_Value
+FROM `eastern-camp-396602.CA_ag.products`
+WHERE Crop='GRAPES'
+GROUP BY Year, Crop
+ORDER BY Year ASC--, Total_Value DESC
+--ORDER BY Total_Value DESC
+
+
+--Comparing product values
+SELECT Year, Crop, SUM(Value) as Total_Value
+FROM `eastern-camp-396602.CA_ag.products`
+GROUP BY Year, Crop
+ORDER BY Year ASC
+
+
+--To visualize the top 10 or Top 3 Crops
+WITH RankedProducts AS (
+  SELECT Year, Crop, SUM(Value) AS Total_Value,
+    ROW_NUMBER() OVER (PARTITION BY Year ORDER BY SUM(Value) DESC) AS RowNum
+  FROM `eastern-camp-396602.CA_ag.products`
+  GROUP BY Year, Crop
+)
+SELECT Year, Crop, Total_Value
+FROM RankedProducts
+WHERE RowNum <= 10
+ORDER BY Year ASC, Total_Value DESC
