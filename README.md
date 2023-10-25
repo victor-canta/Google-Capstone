@@ -7,3 +7,5 @@ Next, I generated spreadsheets optimal for Tableau visualizations by filtering t
 
 Finally, I utilized the cleaned and filtered data to create multiple pie charts, bar charts, line charts, and several other visualizations. In order to clearly communicate the most important insights, I summarized them via a dashboard which
 can be found on my portfolio website.
+
+Please read the "Insights" page for my interpretation of the data.
